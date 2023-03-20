@@ -12,7 +12,7 @@
 #' @examples
 #' rosenopt_bfgs(init = c(5, 5), n.iter = 1e3, alpha = 1, epsilon = 1e-6)
 #' @export
-rosenopt_bfgs = function(init = c(5,5), n.iter=1e3, alpha=1, epsilon=1e-6) {
+rosenopt_bfgs = function(init = c(5,5), n.iter=1e3, alpha=.001, epsilon=1e-6) {
   alp.org=alpha
   xyz = matrix(nrow = n.iter, ncol = 3)
   vals = init
@@ -30,13 +30,13 @@ rosenopt_bfgs = function(init = c(5,5), n.iter=1e3, alpha=1, epsilon=1e-6) {
     y = matrix(rosen_grad(vals.candid[1], vals.candid[2]) - grads, nrow = 2, ncol = 1)
     rho = 1 / (t(y) %*% s)
     I = diag(2)
-    H = (I - rho * (s %*% t(y))) %*% H %*% (I - rho * (y %*% t(s))) + rho * (s %*% t(s))
+    H = (I - c(rho) * (s %*% t(y))) %*% H %*% (I - c(rho) * (y %*% t(s))) + c(rho) * (s %*% t(s))
     if (lk.candid < lk) {
       vals = vals.candid
       lk = lk.candid
       grads = rosen_grad(vals[1], vals[2])
       xyz[i,] = c(vals[1], vals[2], lk)
-      alpha = 1
+      alpha = alp.org
     } else {
       alpha = alpha / 2
     }

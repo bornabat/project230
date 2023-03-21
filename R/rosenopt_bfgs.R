@@ -32,9 +32,7 @@ rosenopt_bfgs = function(init = c(5, 5), n.iter = 1e3, alpha = 0.001, epsilon = 
     return(H.reg)
   }
 
-
   alp.org = alpha
-
   xyz = matrix(nrow = n.iter, ncol = 3)
   vals = init
   lk = rosenbrock(vals[1], vals[2])
@@ -63,6 +61,7 @@ rosenopt_bfgs = function(init = c(5, 5), n.iter = 1e3, alpha = 0.001, epsilon = 
       lk = lk.candid
       grads = rosen_grad(vals[1], vals[2])
       xyz[i, ] = c(vals[1], vals[2], lk)
+
       alpha = alp.org
     } else {
       alpha = alpha / 2

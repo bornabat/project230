@@ -6,9 +6,12 @@
 \usage{
 rosen_vizopt(
   R = 3,
-  cls = c("orange", "steelblue", "red"),
+  cls = c("orange", "steelblue", "red", "navy"),
   optimizer_output,
-  psy = 100
+  psy = 100,
+  main,
+  pnts = TRUE,
+  mag = 1.5
 )
 }
 \arguments{
@@ -25,7 +28,7 @@ A Plotly visualization in 3D.
 Visualize Optimization trajectroy for Rosenbrock's Function
 }
 \examples{
-data = rosenopt_gd(n.iter=1e3,init=c(2,2))
-rosen_vizopt(optimizer_output=data)
+data = rosenopt_gd(n.iter=1e6,init=c(2,2))
+rosen_vizopt(optimizer_output=data,psy=1000,R=1)
 
 }

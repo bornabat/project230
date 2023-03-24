@@ -11,7 +11,7 @@
 #' rosen_viz(R = 1)
 #'
 #' @export
-rosen_viz = function(R = .825, cls = c('orange', 'steelblue'),Rseq=50,lseq=100){
+rosen_viz = function(R = .825, cls = c('steelblue', 'brown1'),Rseq=50,lseq=100){
   r = seq(0, R, length.out = Rseq)
   theta = seq(0, 2*pi, length.out = lseq)
   grd = expand.grid(r, theta)
@@ -41,10 +41,11 @@ rosen_viz = function(R = .825, cls = c('orange', 'steelblue'),Rseq=50,lseq=100){
     marker = list(size = 1.2, color = mat.points[, 3], colorscale = custom_colorscale) # Use the custom colorscale
   )
 
-  fig1 <- fig1 %>% layout(title = "Rosenbrock Function",
-                          scene = list(xaxis = list(title = "x"),
-                                       yaxis = list(title = "y"),
-                                       zaxis = list(title = "Loss")))
+  fig1 <- fig1 %>% layout(title = list(text = '', font = list(size = 28)),
+                          scene = list(xaxis = list(title = "x", tickfont = list(size = 14), titlefont = list(size = 34)),
+                                       yaxis = list(title = "y", tickfont = list(size = 14), titlefont = list(size = 34)),
+                                       zaxis = list(title = "Loss", tickfont = list(size = 14), titlefont = list(size = 34))))
+
 
   fig1
 }

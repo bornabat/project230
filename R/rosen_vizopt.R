@@ -12,7 +12,7 @@
 #' rosen_vizopt(optimizer_output=data,psy=1000,R=1)
 #'
 #' @export
-rosen_vizopt = function(R = 3, cls = c('orange', 'steelblue','red','navy'),optimizer_output,psy=100,main,pnts=TRUE){
+rosen_vizopt = function(R = 3, cls = c('orange', 'steelblue','red','navy'),optimizer_output,psy=100,main,pnts=TRUE, mag=1.5){
   r = seq(0, R, length.out = 50)
   theta = seq(0, 2*pi, length.out = 100)
   grd = expand.grid(r, theta)
@@ -39,7 +39,7 @@ rosen_vizopt = function(R = 3, cls = c('orange', 'steelblue','red','navy'),optim
     z = mat.points[, 3], # Z-axis
     type = "scatter3d",
     mode = "markers",
-    marker = list(size = 0.8, color = mat.points[, 3], colorscale = custom_colorscale) # Use the custom colorscale
+    marker = list(size = 0.8*mag, color = mat.points[, 3], colorscale = custom_colorscale) # Use the custom colorscale
   )
 
   fig1 <- fig1 %>% layout(title = "",
@@ -59,19 +59,22 @@ rosen_vizopt = function(R = 3, cls = c('orange', 'steelblue','red','navy'),optim
     add_trace(x = traj_points[, 1], y = traj_points[, 2], z = traj_points[, 3],
               type = "scatter3d",
               mode = "lines",
-              line = list(color = cls[3], width = 1)) %>%
+              line = list(color = cls[3], width = 1*mag)) %>%
     add_markers(x = traj_points[1, 1], y = traj_points[1, 2], z = traj_points[1, 3],
                 mode = "markers",
-                marker = list(size = 2, color = cls[4]))}
+                marker = list(size = 2*mag, color = cls[4]))}
   else{
     fig1 <- fig1%>%
       add_trace(x = traj_points[, 1], y = traj_points[, 2], z = traj_points[, 3],
                 type = "scatter3d",
                 mode = "lines",
-                line = list(color = cls[3], width = 1)) %>%
+                line = list(color = cls[3], width = 1*mag)) %>%
       add_markers(x = traj_points[1, 1], y = traj_points[1, 2], z = traj_points[1, 3],
                   mode = "markers",
-                  marker = list(size = 2, color = cls[4]))}
+                  marker = list(size = 2*mag, color = cls[4]))%>%
+      add_markers(x = traj_points[nrow(traj_points), 1], y = traj_points[nrow(traj_points), 2], z = traj_points[nrow(traj_points), 3],
+                  mode = "markers",
+                  marker = list(size = 2*mag, color = cls[4]))}
 
 
   fig1

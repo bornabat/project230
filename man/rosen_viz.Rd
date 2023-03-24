@@ -4,7 +4,7 @@
 \alias{rosen_viz}
 \title{Visualize Rosenbrock's Function in 3D using Plotly}
 \usage{
-rosen_viz(R = 0.825, cls = c("orange", "steelblue"), Rseq = 50, lseq = 100)
+rosen_viz(R = 0.825, cls = c("steelblue", "brown1"), Rseq = 50, lseq = 100)
 }
 \arguments{
 \item{R}{A numeric value specifying the maximum range of x and y values to visualize.}
